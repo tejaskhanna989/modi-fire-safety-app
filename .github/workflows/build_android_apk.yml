@@ -55,7 +55,10 @@ jobs:
         run: flutter pub get
 
       - name: Build release APK
-        run: flutter build apk --release 2>&1 | tee build.log
+        shell: bash
+        run: |
+          set -o pipefail
+          flutter build apk --release 2>&1 | tee build.log
 
       # TEMPORARY DIAGNOSTICS: expose build errors as annotations (API-readable).
       - name: Report failure details (diagnostic)
