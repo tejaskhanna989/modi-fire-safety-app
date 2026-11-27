@@ -35,19 +35,17 @@ jobs:
         uses: subosito/flutter-action@v2
         with:
           flutter-version: '3.16.9'
-          cache: true
+          channel: 'stable'
 
       - name: Show tool versions
         run: |
           flutter --version
           java -version
 
-      # The repository does not contain gradlew / gradle-wrapper.jar.
-      # `flutter create` on an existing project generates only missing
-      # Android platform files and preserves the committed custom files.
-      - name: Generate missing Gradle wrapper files
-        run: flutter create --platforms=android .
-
+      # The repository does not contain gradlew or gradle-wrapper.jar.
+      # Flutter will create necessary files automatically during build.
+      # Do NOT run `flutter create` because the project name has hyphens
+      # (which are invalid as Darwin package names and would fail).
       - name: Accept Android SDK licenses
         run: yes | flutter doctor --android-licenses || true
 
