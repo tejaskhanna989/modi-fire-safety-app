@@ -18,6 +18,8 @@ jobs:
   build:
     name: Build release APK
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
 
     steps:
       - name: Check out source
@@ -55,28 +57,16 @@ jobs:
         run: flutter pub get
 
       - name: Build release APK
-        shell: bash
-        run: |
-          set -o pipefail
-          flutter build apk --release 2>&1 | tee build.log
-
-      # TEMPORARY DIAGNOSTICS: expose build errors as annotations (API-readable).
-      - name: Report failure details (diagnostic)
-        if: failure()
-        run: |
-          msg=$(grep -E "error|Error|FAILURE|What went wrong|Exception|\.dart:[0-9]+|Could not|Caused by|Gradle" build.log | head -60 | sed 's/%/%25/g; s/\r/%0D/g' | sed 's/$/%0A/' | tr -d '\n')
-          tail -c 3000 build.log | sed 's/%/%25/g' | sed 's/$/%0A/' | tr -d '\n' > tail.txt
-          echo "::error title=matches::${msg:-none}"
-          echo "::error title=tail::$(cat tail.txt)"
+        run: flutter build apk --release
 
       # android/build.gradle overrides buildDir, so the APK is not always under
-      # build/. Locate it and copy it to a fixed folder for upload.
+      # build/. Locate it and copy it to a fixed folder for publishing.
       - name: Locate release APK
         run: |
           set -e
           apk=$(find . -name 'app-release.apk' -not -path './.git/*' | head -1)
           if [ -z "$apk" ]; then
-            echo "::error title=apk-search::none found; apks: $(find . -name '*.apk' -not -path './.git/*' | head -20 | tr '\n' ' ')"
+            echo "::error::app-release.apk not found"
             exit 1
           fi
           echo "Found APK at: $apk"
@@ -85,8 +75,21 @@ jobs:
 
       - name: Upload release APK
         uses: actions/upload-artifact@v4
+        continue-on-error: true
         with:
           name: modi-fire-safety-release-apk
           path: release-apk/app-release.apk
           if-no-files-found: error
+
+      - name: Publish APK to GitHub Release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          TAG="apk-build-${{ github.run_number }}"
+          cp release-apk/app-release.apk "modi-fire-safety-${TAG}.apk"
+          gh release create "$TAG" "modi-fire-safety-${TAG}.apk" \
+            --prerelease \
+            --title "Modi Fire Safety ${TAG}" \
+            --notes "Release APK built from commit ${{ github.sha }} (branch ${{ github.ref_name }})." \
+            --target "${{ github.sha }}"
 # Build trigger
