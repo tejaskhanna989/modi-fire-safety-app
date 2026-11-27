@@ -12,7 +12,7 @@ import '../../../core/widgets/app_section_header.dart';
 import '../../../core/widgets/demo_banner.dart';
 import '../../../data/models/product.dart';
 import '../../../data/repositories/catalogue_repository.dart';
-import '../../catalogue/presentation/product_card.dart';
+import '../../../catalogue/presentation/product_card.dart';
 
 /// Premium dashboard. All catalogue highlights come from the same mock
 /// repository as the catalogue screen and are labelled as demo data.
