@@ -13,6 +13,6 @@ class DemoDataScope extends InheritedNotifier<DemoDataState> {
     final scope = context.dependOnInheritedWidgetOfExactType<DemoDataScope>();
     assert(scope != null, 'DemoDataScope is missing above this widget.');
     assert(scope!.notifier != null, 'DemoDataScope has no state.');
-    return scope.notifier!;
+    return scope!.notifier!;
   }
 }
