@@ -17,42 +17,44 @@ class StatusBadge extends StatelessWidget {
     late final Color background;
 
     if (status is RequestStatus) {
-      switch (status) {
+      final s = status as RequestStatus;
+      switch (s) {
         case RequestStatus.draft:
-          label = status.label;
+          label = s.label;
           foreground = AppColors.slate;
           background = AppColors.mist;
           break;
         case RequestStatus.submitted:
-          label = status.label;
+          label = s.label;
           foreground = AppColors.info;
           background = AppColors.infoTint;
           break;
         case RequestStatus.inProgress:
-          label = status.label;
+          label = s.label;
           foreground = AppColors.amber;
           background = AppColors.amberTint;
           break;
         case RequestStatus.completed:
-          label = status.label;
+          label = s.label;
           foreground = AppColors.success;
           background = AppColors.successTint;
           break;
       }
     } else if (status is OrderStatus) {
-      switch (status) {
+      final s = status as OrderStatus;
+      switch (s) {
         case OrderStatus.placed:
-          label = status.label;
+          label = s.label;
           foreground = AppColors.info;
           background = AppColors.infoTint;
           break;
         case OrderStatus.processing:
-          label = status.label;
+          label = s.label;
           foreground = AppColors.amber;
           background = AppColors.amberTint;
           break;
         case OrderStatus.completed:
-          label = status.label;
+          label = s.label;
           foreground = AppColors.success;
           background = AppColors.successTint;
           break;

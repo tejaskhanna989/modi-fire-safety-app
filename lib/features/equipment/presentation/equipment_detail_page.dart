@@ -50,7 +50,7 @@ class EquipmentDetailPage extends StatelessWidget {
             AppCard(
               child: Column(
                 children: <Widget>[
-                  const SimulatedQrView(token: equipment.token, size: 160),
+                  SimulatedQrView(token: equipment.token, size: 160),
                 ],
               ),
             ),

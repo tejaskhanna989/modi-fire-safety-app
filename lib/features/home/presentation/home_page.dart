@@ -181,7 +181,6 @@ class _HeroCard extends StatelessWidget {
     return ClipRRect(
       borderRadius: BorderRadius.circular(AppRadius.xl),
       child: Container(
-        minHeight: 218,
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topLeft,
@@ -189,7 +188,9 @@ class _HeroCard extends StatelessWidget {
             colors: <Color>[AppColors.flameDeep, AppColors.flame],
           ),
         ),
-        child: Stack(
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(minHeight: 218),
+          child: Stack(
           children: <Widget>[
             Positioned(
               right: -48,
