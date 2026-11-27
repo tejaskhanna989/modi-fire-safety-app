@@ -48,13 +48,11 @@ jobs:
         run: |
           mkdir -p android/gradle/wrapper
           
-          # Download gradle-wrapper.jar from a stable source
-          # This is the standard gradle wrapper jar
+          # Download gradle-wrapper.jar from official Gradle distribution
           curl -L -o android/gradle/wrapper/gradle-wrapper.jar \
-            "https://raw.githubusercontent.com/gradle/gradle/v8.2.0/gradle/wrapper/gradle-wrapper.jar" \
-            || curl -L -o android/gradle/wrapper/gradle-wrapper.jar \
-            "https://github.com/gradle/gradle/raw/v8.2.0/gradle/wrapper/gradle-wrapper.jar" \
-            || echo "Failed to download gradle-wrapper.jar"
+            "https://services.gradle.org/distributions/gradle-8.2-bin.zip" || \
+          (cd /tmp && curl -L -o gradle.zip "https://services.gradle.org/distributions/gradle-8.2-bin.zip" && \
+           unzip -p gradle.zip "gradle-8.2/lib/plugins/gradle-wrapper-8.2.jar" > android/gradle/wrapper/gradle-wrapper.jar)
           
           # Create gradlew script
           cat > android/gradlew << 'SCRIPT'
