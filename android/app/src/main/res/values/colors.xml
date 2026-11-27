@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="brand_flame">#FFD9411E</color>
+    <color name="brand_ink">#FF12161B</color>
+    <color name="brand_background">#FFFFFFFF</color>
+    <color name="brand_background_dark">#FF0C1014</color>
+</resources>

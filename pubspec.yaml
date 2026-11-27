@@ -1,0 +1,21 @@
+name: modi_fire_safety
+description: "Premium customer application for Modi Fire Safety / Modi International."
+publish_to: "none"
+version: 0.1.0+1
+
+environment:
+  sdk: ">=3.0.0 <4.0.0"
+
+# Phase 1 deliberately declares NO third-party packages.
+# Every dependency requires explicit approval before being added here.
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
+  assets: []
