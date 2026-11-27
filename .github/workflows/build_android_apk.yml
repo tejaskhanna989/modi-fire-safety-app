@@ -44,23 +44,35 @@ jobs:
 
       # The repository does not contain gradlew or gradle-wrapper.jar.
       # Download the Gradle wrapper jar from official distribution and create gradlew script.
-      - name: Prepare Gradle wrapper
+      - name: Download Gradle wrapper
         run: |
           set -e
           mkdir -p android/gradle/wrapper
           
-          # Download gradle-wrapper.jar from official Gradle distribution
-          # Using raw GitHub content URL for the jar file
+          # Download gradle-wrapper.jar from the Gradle GitHub release assets
+          # This URL points directly to the wrapper jar in the gradle distribution
           echo "Downloading gradle-wrapper.jar..."
+          
+          # Method 1: Try raw GitHub content
           curl -L --retry 3 --retry-delay 5 \
             -o android/gradle/wrapper/gradle-wrapper.jar \
-            "https://raw.githubusercontent.com/gradle/gradle/v8.2.0/gradle/wrapper/gradle-wrapper.jar" \
-            || { echo "Primary URL failed, trying alternative..."; \
-                 curl -L --retry 3 --retry-delay 5 \
-                   -o android/gradle/wrapper/gradle-wrapper.jar \
-                   "https://github.com/gradle/gradle/raw/v8.2.0/gradle/wrapper/gradle-wrapper.jar"; }
+            "https://raw.githubusercontent.com/gradle/gradle/v8.2.0/gradle/wrapper/gradle-wrapper.jar" 2>/dev/null || true
           
-          # Verify the jar was downloaded
+          # Verify the jar is valid (should have a valid JAR header)
+          if ! file android/gradle/wrapper/gradle-wrapper.jar | grep -q "ZIP"; then
+            echo "Primary URL failed, trying alternative..."
+            
+            # Method 2: Extract from gradle distribution
+            cd /tmp
+            curl -L -o gradle-bin.zip \
+              "https://services.gradle.org/distributions/gradle-8.2-bin.zip"
+            unzip -q gradle-bin.zip
+            cp gradle-8.2/lib/plugins/gradle-wrapper-8.2.jar \
+              "$GITHUB_WORKSPACE/android/gradle/wrapper/gradle-wrapper.jar"
+            cd "$GITHUB_WORKSPACE"
+          fi
+          
+          # Verify the jar was downloaded correctly
           if [ ! -s android/gradle/wrapper/gradle-wrapper.jar ]; then
             echo "ERROR: gradle-wrapper.jar is empty or missing"
             exit 1
