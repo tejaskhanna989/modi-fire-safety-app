@@ -29,106 +29,29 @@ jobs:
           distribution: temurin
           java-version: '17'
 
-      # Pinned to a Flutter release compatible with the project's
-      # Android Gradle Plugin 8.1.4 / Gradle 8.2 configuration.
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
           flutter-version: '3.16.9'
           channel: 'stable'
 
-      - name: Show tool versions
-        run: |
-          flutter --version
-          java -version
-
-      # Embed gradle-wrapper.jar as base64 to avoid download issues
-      # This is the standard gradle-wrapper from Gradle 8.2
-      - name: Create Gradle wrapper files
+      # The repo lacks android/gradlew and gradle-wrapper.jar. Generate a
+      # scratch project with flutter create (valid package name) and copy
+      # ONLY the missing wrapper files. Existing Android code is not touched.
+      - name: Add missing Gradle wrapper files
         run: |
           set -e
-          mkdir -p android/gradle/wrapper
-          
-          echo "Creating gradle-wrapper.jar from embedded content..."
-          
-          # Create gradle-wrapper.properties
-          cat > android/gradle/wrapper/gradle-wrapper.properties << 'EOF'
-          distributionBase=GRADLE_USER_HOME
-          distributionPath=wrapper/dists
-          distributionUrl=https\\://services.gradle.org/distributions/gradle-8.2-bin.zip
-          zipStoreBase=GRADLE_USER_HOME
-          zipStorePath=wrapper/dists
-          EOF
-          
-          # Create gradlew script
-          cat > android/gradlew << 'SCRIPT'
-          #!/usr/bin/env sh
-          APP_BASENAME=$(basename "$0")
-          APP_ROOT=$(cd "$(dirname "$0")" && pwd)
-          export GRADLE_USER_HOME="/home/runner/.gradle"
-          exec java -Xmx2g -XX:MaxMetaspaceSize=512m \
-            -classpath "$APP_ROOT/android/gradle/wrapper/gradle-wrapper.jar" \
-            org.gradle.wrapper.GradleWrapperMain "$@"
-          SCRIPT
+          flutter create --platforms=android --org com.modifire --project-name modi_fire_safety /tmp/wrapper_src
+          for f in gradlew gradlew.bat gradle/wrapper/gradle-wrapper.jar; do
+            if [ ! -f "android/$f" ]; then
+              mkdir -p "android/$(dirname "$f")"
+              cp "/tmp/wrapper_src/android/$f" "android/$f"
+              echo "Added android/$f"
+            fi
+          done
           chmod +x android/gradlew
-          
-          # Download the gradle-wrapper.jar using Python (more reliable)
-          python3 << 'PYTHON'
-          import urllib.request
-          import base64
-          import os
-          import zipfile
-          import io
-          
-          # Try to download from Gradle distribution and extract the wrapper jar
-          print("Downloading Gradle distribution...")
-          url = "https://services.gradle.org/distributions/gradle-8.2-bin.zip"
-          
-          try:
-              with urllib.request.urlopen(url, timeout=60) as response:
-                  data = response.read()
-                  print(f"Downloaded {len(data)} bytes")
-                  
-                  # Look for gradle-wrapper jar in the plugins directory
-                  with zipfile.ZipFile(io.BytesIO(data), 'r') as zf:
-                      # Find wrapper-related jars
-                      for name in zf.namelist():
-                          if 'plugins' in name and 'wrapper' in name.lower() and name.endswith('.jar'):
-                              print(f"Found: {name}")
-                              jar_data = zf.read(name)
-                              with open('android/gradle/wrapper/gradle-wrapper.jar', 'wb') as f:
-                                  f.write(jar_data)
-                              print(f"Wrote {len(jar_data)} bytes to gradle-wrapper.jar")
-                              break
-                      else:
-                          print("No wrapper jar found in plugins directory")
-                          # Try lib directory
-                          for name in zf.namelist():
-                              if 'lib' in name and 'wrapper' in name.lower() and name.endswith('.jar'):
-                                  print(f"Found in lib: {name}")
-                                  jar_data = zf.read(name)
-                                  with open('android/gradle/wrapper/gradle-wrapper.jar', 'wb') as f:
-                                      f.write(jar_data)
-                                  print(f"Wrote {len(jar_data)} bytes to gradle-wrapper.jar")
-                                  break
-          except Exception as e:
-              print(f"Download error: {e}")
-              raise
-          PYTHON
-          
-          # Verify the jar was created
-          if [ -s android/gradle/wrapper/gradle-wrapper.jar ]; then
-            JAR_SIZE=$(stat -c%s android/gradle/wrapper/gradle-wrapper.jar)
-            echo "gradle-wrapper.jar created: ${JAR_SIZE} bytes"
-          else
-            echo "ERROR: gradle-wrapper.jar creation failed"
-            exit 1
-          fi
 
-      - name: Accept Android SDK licenses
-        run: yes | flutter doctor --android-licenses || true
-
-      - name: Install Flutter dependencies
+      - name: Install dependencies
         run: flutter pub get
 
       - name: Build release APK
@@ -140,4 +63,3 @@ jobs:
           name: modi-fire-safety-release-apk
           path: build/app/outputs/flutter-apk/app-release.apk
           if-no-files-found: error
-EOF
