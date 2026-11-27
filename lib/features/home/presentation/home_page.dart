@@ -161,7 +161,7 @@ class _Greeting extends StatelessWidget {
         const SizedBox(height: AppSpacing.xs),
         Text(
           'Hello, $name',
-          style: AppTypography.displayMedium.copyWith(color: context.scheme.onSurface);
+          style: AppTypography.displayMedium.copyWith(color: context.scheme.onSurface),
         ),
         const SizedBox(height: AppSpacing.sm),
         Text(

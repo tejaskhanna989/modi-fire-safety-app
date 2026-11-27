@@ -14,6 +14,6 @@ class CartScope extends InheritedNotifier<CartState> {
     final scope = context.dependOnInheritedWidgetOfExactType<CartScope>();
     assert(scope != null, 'CartScope is missing above this widget.');
     assert(scope!.notifier != null, 'CartScope has no cart state.');
-    return scope.notifier!;
+    return scope!.notifier!;
   }
 }
