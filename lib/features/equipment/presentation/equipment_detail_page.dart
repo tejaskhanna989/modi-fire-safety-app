@@ -16,7 +16,7 @@ import '../../../core/widgets/simulated_qr_view.dart';
 import '../../../core/widgets/status_badge.dart';
 import '../../../data/models/equipment.dart';
 import '../../../data/models/request_enums.dart';
-import '../services/presentation/service_request_page.dart';
+import '../../services/presentation/service_request_page.dart';
 
 class EquipmentDetailPage extends StatelessWidget {
   const EquipmentDetailPage({super.key, required this.equipment});

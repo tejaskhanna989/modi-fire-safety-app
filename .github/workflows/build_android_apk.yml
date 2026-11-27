@@ -43,9 +43,28 @@ jobs:
           java -version
 
       # The repository does not contain gradlew or gradle-wrapper.jar.
-      # Flutter will create necessary files automatically during build.
-      # Do NOT run `flutter create` because the project name has hyphens
-      # (which are invalid as Darwin package names and would fail).
+      # Download the Gradle wrapper jar from official distribution and create gradlew script.
+      - name: Download Gradle wrapper
+        run: |
+          mkdir -p android/gradle/wrapper
+          
+          # Download gradle-wrapper.jar from the Gradle GitHub releases
+          # This is a small jar file that enables the Gradle wrapper protocol
+          curl -L -o android/gradle/wrapper/gradle-wrapper.jar \
+            "https://raw.githubusercontent.com/gradle/gradle/v8.2.0/gradle/wrapper/gradle-wrapper.jar"
+          
+          # Create gradlew script
+          cat > android/gradlew << 'SCRIPT'
+          #!/usr/bin/env sh
+          APP_BASENAME=$(basename "$0")
+          APP_ROOT=$(cd "$(dirname "$0")" && pwd)
+          export GRADLE_USER_HOME="/home/runner/.gradle"
+          exec java -Xmx2g -XX:MaxMetaspaceSize=512m \
+            -classpath "$APP_ROOT/android/gradle/wrapper/gradle-wrapper.jar" \
+            org.gradle.wrapper.GradleWrapperMain "$@"
+          SCRIPT
+          chmod +x android/gradlew
+
       - name: Accept Android SDK licenses
         run: yes | flutter doctor --android-licenses || true
 
