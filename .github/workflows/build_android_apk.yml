@@ -55,7 +55,16 @@ jobs:
         run: flutter pub get
 
       - name: Build release APK
-        run: flutter build apk --release
+        run: flutter build apk --release 2>&1 | tee build.log
+
+      # TEMPORARY DIAGNOSTICS: expose build errors as annotations (API-readable).
+      - name: Report failure details (diagnostic)
+        if: failure()
+        run: |
+          msg=$(grep -E "error|Error|FAILURE|What went wrong|Exception|\.dart:[0-9]+|Could not|Caused by|Gradle" build.log | head -60 | sed 's/%/%25/g; s/\r/%0D/g' | sed 's/$/%0A/' | tr -d '\n')
+          tail -c 3000 build.log | sed 's/%/%25/g' | sed 's/$/%0A/' | tr -d '\n' > tail.txt
+          echo "::error title=matches::${msg:-none}"
+          echo "::error title=tail::$(cat tail.txt)"
 
       # android/build.gradle overrides buildDir, so the APK is not always under
       # build/. Locate it and copy it to a fixed folder for upload.
