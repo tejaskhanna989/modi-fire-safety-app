@@ -51,7 +51,7 @@ class ProductDetailPage extends StatelessWidget {
                 size: 84,
                 color: context.isDark
                     ? context.scheme.primary
-                    : AppColors.flameDeep,
+                    : AppColors.navy,
               ),
             ),
             const SizedBox(height: AppSpacing.xxl),

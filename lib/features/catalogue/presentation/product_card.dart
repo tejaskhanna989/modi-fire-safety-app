@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../core/extensions/context_extensions.dart';
+import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_radius.dart';
 import '../../../core/theme/app_spacing.dart';
 import '../../../core/theme/app_typography.dart';
@@ -47,7 +48,7 @@ class ProductCard extends StatelessWidget {
                 size: 38,
                 color: context.isDark
                     ? Theme.of(context).colorScheme.primary
-                    : Colors.black87,
+                    : AppColors.inkSoft,
               ),
             ),
           ),

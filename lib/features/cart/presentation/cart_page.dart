@@ -139,7 +139,7 @@ class _CartLine extends StatelessWidget {
             ),
             child: Icon(
               icon,
-              color: context.isDark ? context.scheme.primary : AppColors.flameDeep,
+              color: context.isDark ? context.scheme.primary : AppColors.navy,
             ),
           ),
           const SizedBox(width: AppSpacing.lg),

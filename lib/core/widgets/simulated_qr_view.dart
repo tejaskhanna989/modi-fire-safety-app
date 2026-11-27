@@ -74,7 +74,7 @@ class _MatrixPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     final cell = size.width / matrix.length;
     final paint = Paint()
-      ..color = AppColors.flameDeep
+      ..color = AppColors.navy
       ..style = PaintingStyle.fill;
 
     for (var y = 0; y < matrix.length; y++) {

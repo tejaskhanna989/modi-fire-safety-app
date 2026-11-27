@@ -39,13 +39,13 @@ class ComingSoonPage extends StatelessWidget {
                 width: 96,
                 height: 96,
                 decoration: BoxDecoration(
-                  color: isDark ? AppColors.darkSurfaceAlt : AppColors.flameTint,
+                  color: isDark ? AppColors.darkSurfaceAlt : AppColors.navyTint,
                   borderRadius: BorderRadius.circular(AppRadius.xl),
                 ),
                 child: Icon(
                   Icons.construction_rounded,
                   size: 42,
-                  color: isDark ? AppColors.flameLight : AppColors.flameDeep,
+                  color: isDark ? AppColors.navyLight : AppColors.navy,
                 ),
               ),
               const SizedBox(height: AppSpacing.xxl),

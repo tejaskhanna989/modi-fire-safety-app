@@ -22,7 +22,7 @@ class StatusBadge extends StatelessWidget {
         case RequestStatus.draft:
           label = s.label;
           foreground = AppColors.slate;
-          background = AppColors.mist;
+          background = AppColors.softGrey;
           break;
         case RequestStatus.submitted:
           label = s.label;
@@ -62,7 +62,7 @@ class StatusBadge extends StatelessWidget {
     } else {
       label = status.toString().toUpperCase();
       foreground = AppColors.slate;
-      background = AppColors.mist;
+      background = AppColors.softGrey;
     }
 
     return AppBadge(label: label, foreground: foreground, background: background);

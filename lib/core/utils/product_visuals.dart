@@ -35,7 +35,7 @@ class ProductVisuals {
   static Color tintForCategory(String categoryId) {
     switch (categoryId) {
       case 'extinguishers':
-        return AppColors.flameTint;
+        return AppColors.safetyRedTint;
       case 'alarms':
         return AppColors.amberTint;
       case 'hoses':
@@ -43,15 +43,15 @@ class ProductVisuals {
       case 'blankets':
         return AppColors.successTint;
       case 'ppe':
-        return AppColors.mist;
+        return AppColors.softGrey;
       case 'first-aid':
         return AppColors.successTint;
       case 'signage':
         return AppColors.amberTint;
       case 'kitchen':
-        return AppColors.flameTint;
+        return AppColors.safetyRedTint;
       default:
-        return AppColors.mist;
+        return AppColors.softGrey;
     }
   }
 }

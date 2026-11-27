@@ -178,43 +178,19 @@ class _HeroCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Flat navy panel with a single safety-red accent line. No gradients,
+    // decorative shapes or shadows.
     return ClipRRect(
-      borderRadius: BorderRadius.circular(AppRadius.xl),
+      borderRadius: BorderRadius.circular(AppRadius.lg),
       child: Container(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: <Color>[AppColors.flameDeep, AppColors.flame],
-          ),
-        ),
-        child: ConstrainedBox(
-          constraints: const BoxConstraints(minHeight: 218),
-          child: Stack(
+        color: AppColors.navy,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            Positioned(
-              right: -48,
-              top: -72,
-              child: Container(
-                width: 220,
-                height: 220,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: Colors.white.withOpacity(0.08),
-                ),
-              ),
-            ),
-            Positioned(
-              right: 42,
-              bottom: -64,
-              child: Container(
-                width: 160,
-                height: 160,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: Colors.white.withOpacity(0.06),
-                ),
-              ),
+            const SizedBox(
+              height: 4,
+              child: ColoredBox(color: AppColors.safetyRed),
             ),
             Padding(
               padding: const EdgeInsets.all(AppSpacing.xxl),
@@ -222,39 +198,30 @@ class _HeroCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: AppSpacing.md,
-                      vertical: AppSpacing.xs,
-                    ),
-                    decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.16),
-                      borderRadius: BorderRadius.circular(AppRadius.pill),
-                    ),
-                    child: Text(
-                      'DEMO CATALOGUE',
-                      style: AppTypography.labelSmall.copyWith(color: Colors.white),
-                    ),
+                  Text(
+                    'DEMO CATALOGUE',
+                    style: AppTypography.labelSmall
+                        .copyWith(color: AppColors.navyLight),
                   ),
-                  const SizedBox(height: AppSpacing.lg),
+                  const SizedBox(height: AppSpacing.md),
                   Text(
                     'Protection you\ncan count on.',
-                    style: AppTypography.displayMedium.copyWith(color: Colors.white),
+                    style: AppTypography.displayMedium
+                        .copyWith(color: AppColors.white),
                   ),
                   const SizedBox(height: AppSpacing.sm),
                   Text(
                     'Equipment, service and expertise for every site.',
-                    style: AppTypography.bodyMedium.copyWith(
-                      color: Colors.white.withOpacity(0.86),
-                    ),
+                    style: AppTypography.bodyMedium
+                        .copyWith(color: AppColors.navyLight),
                   ),
                   const SizedBox(height: AppSpacing.xl),
                   FilledButton(
                     onPressed: () =>
                         Navigator.of(context).pushNamed(AppRoutes.catalogue),
                     style: FilledButton.styleFrom(
-                      backgroundColor: Colors.white,
-                      foregroundColor: AppColors.flameDeep,
+                      backgroundColor: AppColors.white,
+                      foregroundColor: AppColors.navy,
                     ),
                     child: const Text('Explore catalogue'),
                   ),
@@ -262,7 +229,6 @@ class _HeroCard extends StatelessWidget {
               ),
             ),
           ],
-        ),
         ),
       ),
     );
@@ -286,13 +252,13 @@ class _QuickActionTile extends StatelessWidget {
             width: 38,
             height: 38,
             decoration: BoxDecoration(
-              color: context.isDark ? AppColors.darkSurfaceAlt : AppColors.flameTint,
+              color: context.isDark ? AppColors.darkSurfaceAlt : AppColors.navyTint,
               borderRadius: BorderRadius.circular(AppRadius.md),
             ),
             child: Icon(
               action.icon,
               size: 20,
-              color: context.isDark ? AppColors.flameLight : AppColors.flameDeep,
+              color: context.isDark ? AppColors.navyLight : AppColors.navy,
             ),
           ),
           Column(

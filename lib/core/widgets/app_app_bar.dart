@@ -8,6 +8,7 @@ import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_radius.dart';
 import '../../core/theme/app_spacing.dart';
 import '../../core/theme/app_typography.dart';
+import 'brand_wordmark.dart';
 
 /// Shared top bar. Keeps branding, mode visibility and global actions
 /// consistent on every screen.
@@ -77,43 +78,7 @@ class _Brand extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (!showBrand) return const SizedBox.shrink();
-
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      children: <Widget>[
-        Container(
-          width: 38,
-          height: 38,
-          decoration: BoxDecoration(
-            color: context.isDark ? AppColors.flameDeep : AppColors.flame,
-            borderRadius: BorderRadius.circular(AppRadius.md),
-          ),
-          child: const Icon(
-            Icons.local_fire_department_rounded,
-            color: Colors.white,
-            size: 22,
-          ),
-        ),
-        const SizedBox(width: AppSpacing.md),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            Text(
-              'MODI',
-              style: AppTypography.labelSmall.copyWith(
-                color: context.scheme.primary,
-                letterSpacing: 1.8,
-              ),
-            ),
-            Text(
-              'FIRE SAFETY',
-              style: AppTypography.titleSmall.copyWith(height: 1.1),
-            ),
-          ],
-        ),
-      ],
-    );
+    return const BrandWordmark();
   }
 }
 
