@@ -54,28 +54,23 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
-      # TEMPORARY DIAGNOSTICS: surface compiler/analyzer errors as annotations
-      # (readable via the GitHub API) because raw job logs are not downloadable.
-      - name: Static analysis (diagnostic)
-        run: flutter analyze 2>&1 | tee analyze.log
-        continue-on-error: true
-
       - name: Build release APK
-        run: flutter build apk --release 2>&1 | tee build.log
+        run: flutter build apk --release
 
-      - name: Report failure details (diagnostic)
-        if: failure()
+      # android/build.gradle overrides buildDir, so the APK is not always under
+      # build/. Locate it and copy it to a fixed folder for upload.
+      - name: Locate release APK
         run: |
-          for f in analyze.log build.log; do
-            [ -f "$f" ] || continue
-            msg=$(grep -E "error|Error|FAILURE|What went wrong|Exception|\.dart:[0-9]+|Could not|Caused by" "$f" | head -40 | sed 's/%/%25/g; s/\r/%0D/g' | sed 's/$/%0A/' | tr -d '\n')
-            echo "::error title=$f::${msg:-no matching lines}"
-          done
+          set -e
+          apk=$(find . -name app-release.apk -path '*flutter-apk*' -not -path './.git/*' | head -1)
+          echo "Found APK at: $apk"
+          mkdir -p release-apk
+          cp "$apk" release-apk/app-release.apk
 
       - name: Upload release APK
         uses: actions/upload-artifact@v4
         with:
           name: modi-fire-safety-release-apk
-          path: build/app/outputs/flutter-apk/app-release.apk
+          path: release-apk/app-release.apk
           if-no-files-found: error
 # Build trigger
