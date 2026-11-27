@@ -263,6 +263,7 @@ class _HeroCard extends StatelessWidget {
             ),
           ],
         ),
+        ),
       ),
     );
   }
