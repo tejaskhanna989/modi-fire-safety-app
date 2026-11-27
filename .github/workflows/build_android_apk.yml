@@ -44,15 +44,28 @@ jobs:
 
       # The repository does not contain gradlew or gradle-wrapper.jar.
       # Download the Gradle wrapper jar from official distribution and create gradlew script.
-      - name: Download Gradle wrapper
+      - name: Prepare Gradle wrapper
         run: |
+          set -e
           mkdir -p android/gradle/wrapper
           
           # Download gradle-wrapper.jar from official Gradle distribution
-          curl -L -o android/gradle/wrapper/gradle-wrapper.jar \
-            "https://services.gradle.org/distributions/gradle-8.2-bin.zip" || \
-          (cd /tmp && curl -L -o gradle.zip "https://services.gradle.org/distributions/gradle-8.2-bin.zip" && \
-           unzip -p gradle.zip "gradle-8.2/lib/plugins/gradle-wrapper-8.2.jar" > android/gradle/wrapper/gradle-wrapper.jar)
+          # Using raw GitHub content URL for the jar file
+          echo "Downloading gradle-wrapper.jar..."
+          curl -L --retry 3 --retry-delay 5 \
+            -o android/gradle/wrapper/gradle-wrapper.jar \
+            "https://raw.githubusercontent.com/gradle/gradle/v8.2.0/gradle/wrapper/gradle-wrapper.jar" \
+            || { echo "Primary URL failed, trying alternative..."; \
+                 curl -L --retry 3 --retry-delay 5 \
+                   -o android/gradle/wrapper/gradle-wrapper.jar \
+                   "https://github.com/gradle/gradle/raw/v8.2.0/gradle/wrapper/gradle-wrapper.jar"; }
+          
+          # Verify the jar was downloaded
+          if [ ! -s android/gradle/wrapper/gradle-wrapper.jar ]; then
+            echo "ERROR: gradle-wrapper.jar is empty or missing"
+            exit 1
+          fi
+          echo "gradle-wrapper.jar size: $(stat -c%s android/gradle/wrapper/gradle-wrapper.jar) bytes"
           
           # Create gradlew script
           cat > android/gradlew << 'SCRIPT'
