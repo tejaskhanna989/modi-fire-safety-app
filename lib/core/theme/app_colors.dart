@@ -24,6 +24,13 @@ class AppColors {
   static const Color safetyRedLight = Color(0xFFFF6B70);
   static const Color safetyRedTint = Color(0xFFFCE9EA);
 
+  // Fire accents: the flame orange from the brand logo. Used for indicators,
+  // focus, selection and highlights. Use fireDeep for accent text on white.
+  static const Color fire = Color(0xFFF94C06);
+  static const Color fireDeep = Color(0xFFC53A03);
+  static const Color fireLight = Color(0xFFFF8A5C);
+  static const Color fireTint = Color(0xFFFFEEE6);
+
   static const Color softGrey = Color(0xFFF4F6F8);
   static const Color white = Color(0xFFFFFFFF);
 

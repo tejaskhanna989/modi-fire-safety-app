@@ -36,7 +36,7 @@ class AppTheme {
     ).copyWith(
       primary: primary,
       onPrimary: onPrimary,
-      secondary: AppColors.safetyRed,
+      secondary: isDark ? AppColors.fireLight : AppColors.fire,
       onSecondary: AppColors.white,
       error: AppColors.danger,
       surface: surface,
@@ -89,12 +89,12 @@ class AppTheme {
         elevation: 0,
         height: 68,
         indicatorColor: isDark
-            ? AppColors.navyLight.withOpacity(0.18)
-            : AppColors.navyTint,
+            ? AppColors.fire.withOpacity(0.22)
+            : AppColors.fireTint,
         iconTheme: MaterialStateProperty.resolveWith((states) {
           final selected = states.contains(MaterialState.selected);
           return IconThemeData(
-            color: selected ? primary : muted,
+            color: selected ? (isDark ? AppColors.fireLight : AppColors.fireDeep) : muted,
             size: 24,
           );
         }),
@@ -147,7 +147,7 @@ class AppTheme {
         enabledBorder: inputBorder,
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(AppRadius.md),
-          borderSide: BorderSide(color: primary, width: 1.5),
+          borderSide: BorderSide(color: isDark ? AppColors.fireLight : AppColors.fire, width: 1.5),
         ),
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(AppRadius.md),
@@ -158,6 +158,10 @@ class AppTheme {
       ),
       chipTheme: ChipThemeData(
         backgroundColor: surface,
+        selectedColor: isDark
+            ? AppColors.fire.withOpacity(0.25)
+            : AppColors.fireTint,
+        checkmarkColor: isDark ? AppColors.fireLight : AppColors.fireDeep,
         side: BorderSide(color: outline),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(AppRadius.pill),
@@ -176,6 +180,23 @@ class AppTheme {
             top: Radius.circular(AppRadius.xl),
           ),
         ),
+      ),
+      badgeTheme: BadgeThemeData(
+        backgroundColor: isDark ? AppColors.fireLight : AppColors.fire,
+        textColor: AppColors.white,
+      ),
+      switchTheme: SwitchThemeData(
+        thumbColor: MaterialStateProperty.resolveWith((states) =>
+            states.contains(MaterialState.selected)
+                ? (isDark ? AppColors.fireLight : AppColors.fire)
+                : muted),
+        trackColor: MaterialStateProperty.resolveWith((states) =>
+            states.contains(MaterialState.selected)
+                ? AppColors.fire.withOpacity(0.35)
+                : outline),
+      ),
+      progressIndicatorTheme: ProgressIndicatorThemeData(
+        color: isDark ? AppColors.fireLight : AppColors.fire,
       ),
       snackBarTheme: SnackBarThemeData(
         backgroundColor: isDark ? AppColors.darkSurfaceAlt : AppColors.ink,

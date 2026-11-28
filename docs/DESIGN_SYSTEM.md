@@ -15,6 +15,15 @@ colours, or create their own `ThemeData`.
 | Primary text | `AppColors.ink` | `#1C2127` (dark charcoal) |
 | Secondary text | `AppColors.slate` | `#5E6772` (neutral grey) |
 | Hairlines and borders | `AppColors.line` | `#DDE2E8` |
+| Fire accent (logo flame) | `AppColors.fire` | `#F94C06` |
+| Fire accent text on white | `AppColors.fireDeep` | `#C53A03` |
+| Fire tint (selected and highlighted fills) | `AppColors.fireTint` | `#FFEEE6` |
+
+Fire accents are used for: the active tab icon and indicator, focus outlines,
+selected chips, switches, the cart badge, progress indicators, section header
+bars and the home hero accent line. Navy stays on primary buttons and headings.
+Do not use fire orange for body text; use `fireDeep` when a fire-coloured
+label is needed on white.
 
 Semantic colours (`amber`, `success`, `info`, `danger`, each with a `*Tint`)
 are for status only and must always be paired with a text label.

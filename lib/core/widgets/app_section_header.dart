@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../extensions/context_extensions.dart';
+import '../theme/app_colors.dart';
 import '../theme/app_spacing.dart';
 import '../theme/app_typography.dart';
 
@@ -29,7 +30,24 @@ class AppSectionHeader extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Text(title, style: AppTypography.headlineMedium),
+                Row(
+                  children: <Widget>[
+                    Container(
+                      width: 4,
+                      height: 22,
+                      decoration: BoxDecoration(
+                        color: context.isDark
+                            ? AppColors.fireLight
+                            : AppColors.fire,
+                        borderRadius: BorderRadius.circular(2),
+                      ),
+                    ),
+                    const SizedBox(width: AppSpacing.sm),
+                    Flexible(
+                      child: Text(title, style: AppTypography.headlineMedium),
+                    ),
+                  ],
+                ),
                 if (subtitle != null) ...<Widget>[
                   const SizedBox(height: AppSpacing.xs),
                   Text(subtitle!, style: AppTypography.bodyMedium),

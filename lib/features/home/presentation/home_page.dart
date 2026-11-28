@@ -190,7 +190,7 @@ class _HeroCard extends StatelessWidget {
           children: <Widget>[
             const SizedBox(
               height: 4,
-              child: ColoredBox(color: AppColors.safetyRed),
+              child: ColoredBox(color: AppColors.fire),
             ),
             Padding(
               padding: const EdgeInsets.all(AppSpacing.xxl),
