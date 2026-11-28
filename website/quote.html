@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Request a quotation — Modi Fire Safety (demo)</title>
+  <link rel="icon" href="assets/img/flame_logo.png">
+  <link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" href="index.html">
+        <img src="assets/img/flame_logo.png" alt="" width="26" height="36">
+        <span class="brand-text"><span class="top">MODI</span><span class="bottom">FIRE SAFETY</span></span>
+      </a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+      <nav class="nav" id="site-nav" aria-label="Main">
+        <a href="index.html">Home</a>
+        <a href="catalogue.html">Catalogue</a>
+        <a href="quote.html" aria-current="page">Request a quote <span class="quote-count" data-quote-count hidden>0</span></a>
+        <a href="services.html">Servicing &amp; refilling</a>
+        <a href="requests.html">My requests</a>
+      </nav>
+    </div>
+  </header>
+  <div class="demo-bar">DEMO REQUEST: saved in this browser only. Nothing is sent to Modi International.</div>
+
+  <main id="main">
+    <section class="block" style="padding-top:var(--space-6)">
+      <div class="container">
+        <div class="section-head"><span class="bar" aria-hidden="true"></span><h1 style="margin:0">Request a quotation</h1></div>
+        <p class="section-sub">Tell us who you are and which products you need. Individual and business customers can both request a quotation.</p>
+
+        <div id="form-area">
+          <form class="form" id="quote-form" novalidate>
+            <div class="field" data-field="name">
+              <label for="q-name">Company or customer name</label>
+              <input id="q-name" name="name" type="text" autocomplete="organization" required>
+              <span class="error" id="q-name-err"></span>
+            </div>
+            <div class="field" data-field="contact">
+              <label for="q-contact">Contact person</label>
+              <input id="q-contact" name="contact" type="text" autocomplete="name" required>
+              <span class="error" id="q-contact-err"></span>
+            </div>
+            <div class="field" data-field="phone">
+              <label for="q-phone">Phone</label>
+              <input id="q-phone" name="phone" type="tel" autocomplete="tel" required>
+              <span class="error" id="q-phone-err"></span>
+            </div>
+            <div class="field" data-field="email">
+              <label for="q-email">Email</label>
+              <input id="q-email" name="email" type="email" autocomplete="email" required>
+              <span class="error" id="q-email-err"></span>
+            </div>
+
+            <fieldset>
+              <legend>Products and quantities</legend>
+              <p class="hint small muted" style="margin-top:0">Select at least one product. Items you added from the catalogue are pre-selected.</p>
+              <div id="product-lines"></div>
+              <span class="error" id="lines-err"></span>
+            </fieldset>
+
+            <div class="field">
+              <label for="q-notes">Notes (optional)</label>
+              <textarea id="q-notes" name="notes" placeholder="Project details or site information"></textarea>
+            </div>
+
+            <div class="actions" style="margin-top:0">
+              <button class="btn btn-primary" type="submit">Submit demo quotation request</button>
+              <a class="btn btn-secondary" href="catalogue.html">Back to catalogue</a>
+            </div>
+          </form>
+        </div>
+
+        <div class="result" id="result" hidden tabindex="-1" aria-live="polite"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-bottom">&copy; 2026 Modi International. Demo build: no live services connected.</div>
+    </div>
+  </footer>
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/app.js"></script>
+  <script src="assets/js/quote.js"></script>
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Servicing &amp; refilling — Modi Fire Safety (demo)</title>
+  <link rel="icon" href="assets/img/flame_logo.png">
+  <link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" href="index.html">
+        <img src="assets/img/flame_logo.png" alt="" width="26" height="36">
+        <span class="brand-text"><span class="top">MODI</span><span class="bottom">FIRE SAFETY</span></span>
+      </a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+      <nav class="nav" id="site-nav" aria-label="Main">
+        <a href="index.html">Home</a>
+        <a href="catalogue.html">Catalogue</a>
+        <a href="quote.html">Request a quote <span class="quote-count" data-quote-count hidden>0</span></a>
+        <a href="services.html" aria-current="page">Servicing &amp; refilling</a>
+        <a href="requests.html">My requests</a>
+      </nav>
+    </div>
+  </header>
+  <div class="demo-bar">DEMO REQUEST: saved in this browser only. No technician is dispatched.</div>
+
+  <main id="main">
+    <section class="block" style="padding-top:var(--space-6)">
+      <div class="container">
+        <div class="section-head"><span class="bar" aria-hidden="true"></span><h1 style="margin:0">Book servicing or refilling</h1></div>
+        <p class="section-sub">Choose a request type and describe the equipment. We will use the reference number to follow up.</p>
+
+        <div id="form-area">
+          <form class="form" id="service-form" novalidate>
+            <fieldset>
+              <legend>Request type</legend>
+              <div class="radio-group">
+                <label><input type="radio" name="type" value="servicing" checked>
+                  <span><strong>Servicing</strong><br><span class="muted small">A routine service visit for your equipment.</span></span></label>
+                <label><input type="radio" name="type" value="refilling">
+                  <span><strong>Refilling</strong><br><span class="muted small">A refill for your extinguishers or suppression systems.</span></span></label>
+                <label><input type="radio" name="type" value="inspection">
+                  <span><strong>Inspection</strong><br><span class="muted small">An inspection of your existing fire safety equipment.</span></span></label>
+              </div>
+            </fieldset>
+
+            <div class="field" data-field="equipment">
+              <label for="s-equipment">Equipment (name or asset tag)</label>
+              <input id="s-equipment" name="equipment" type="text" placeholder="e.g. Dry Powder Extinguisher, AST-DEMO-001" required>
+              <span class="hint">Use the asset tag if you have one. Otherwise describe the equipment and its location.</span>
+              <span class="error" id="equipment-err"></span>
+            </div>
+
+            <div class="field" data-field="location">
+              <label for="s-location">Site or location</label>
+              <input id="s-location" name="location" type="text" placeholder="e.g. Warehouse 2, Floor 3" required>
+              <span class="error" id="location-err"></span>
+            </div>
+
+            <div class="field" data-field="date">
+              <label for="s-date">Preferred date</label>
+              <input id="s-date" name="date" type="date" required>
+              <span class="error" id="date-err"></span>
+            </div>
+
+            <div class="field">
+              <label for="s-notes">Notes (optional)</label>
+              <textarea id="s-notes" name="notes" placeholder="Access details, contact preferences or other context"></textarea>
+            </div>
+
+            <div class="actions" style="margin-top:0">
+              <button class="btn btn-primary" type="submit">Submit demo service request</button>
+            </div>
+          </form>
+        </div>
+
+        <div class="result" id="result" hidden tabindex="-1" aria-live="polite"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-bottom">&copy; 2026 Modi International. Demo build: no live services connected.</div>
+    </div>
+  </footer>
+  <script src="assets/js/app.js"></script>
+  <script src="assets/js/services.js"></script>
+</body>
+</html>

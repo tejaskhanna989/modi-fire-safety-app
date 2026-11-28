@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Catalogue — Modi Fire Safety (demo)</title>
+  <link rel="icon" href="assets/img/flame_logo.png">
+  <link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" href="index.html">
+        <img src="assets/img/flame_logo.png" alt="" width="26" height="36">
+        <span class="brand-text"><span class="top">MODI</span><span class="bottom">FIRE SAFETY</span></span>
+      </a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+      <nav class="nav" id="site-nav" aria-label="Main">
+        <a href="index.html">Home</a>
+        <a href="catalogue.html" aria-current="page">Catalogue</a>
+        <a href="quote.html">Request a quote <span class="quote-count" data-quote-count hidden>0</span></a>
+        <a href="services.html">Servicing &amp; refilling</a>
+        <a href="requests.html">My requests</a>
+      </nav>
+    </div>
+  </header>
+  <div class="demo-bar">DEMO CATALOGUE: illustrative items and prices, not Modi International quotes.</div>
+
+  <main id="main">
+    <section class="block" style="padding-top:var(--space-6)">
+      <div class="container">
+        <div class="section-head"><span class="bar" aria-hidden="true"></span><h1 style="margin:0">Product catalogue</h1></div>
+        <p class="section-sub">Filter by category or search by name. Add items to your quotation request, then submit it from the quote page.</p>
+
+        <div class="field" style="max-width:420px;margin-bottom:var(--space-4)">
+          <label for="search">Search products</label>
+          <input id="search" type="search" placeholder="e.g. extinguisher, detector" autocomplete="off">
+        </div>
+
+        <div class="chips" id="category-chips" role="group" aria-label="Filter by category"></div>
+        <p class="muted small" id="result-count" aria-live="polite"></p>
+
+        <div class="grid" id="product-grid"></div>
+        <div class="empty" id="empty" hidden>
+          <h2 style="font-size:1.1rem">No demo products found</h2>
+          <p class="small">Try a different search term or choose All categories.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-bottom">&copy; 2026 Modi International. Demo build: no live services connected.</div>
+    </div>
+  </footer>
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/app.js"></script>
+  <script src="assets/js/catalogue.js"></script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>My requests — Modi Fire Safety (demo)</title>
+  <link rel="icon" href="assets/img/flame_logo.png">
+  <link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" href="index.html">
+        <img src="assets/img/flame_logo.png" alt="" width="26" height="36">
+        <span class="brand-text"><span class="top">MODI</span><span class="bottom">FIRE SAFETY</span></span>
+      </a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+      <nav class="nav" id="site-nav" aria-label="Main">
+        <a href="index.html">Home</a>
+        <a href="catalogue.html">Catalogue</a>
+        <a href="quote.html">Request a quote <span class="quote-count" data-quote-count hidden>0</span></a>
+        <a href="services.html">Servicing &amp; refilling</a>
+        <a href="requests.html" aria-current="page">My requests</a>
+      </nav>
+    </div>
+  </header>
+  <div class="demo-bar">DEMO TRACKING: requests are stored in this browser only. Statuses do not update from a live system.</div>
+
+  <main id="main">
+    <section class="block" style="padding-top:var(--space-6)">
+      <div class="container">
+        <div class="section-head"><span class="bar" aria-hidden="true"></span><h1 style="margin:0">My requests</h1></div>
+        <p class="section-sub">Track quotation and servicing requests made from this browser. Enter a reference number to find one request quickly.</p>
+
+        <form class="form" id="lookup-form" role="search" style="max-width:520px;margin-bottom:var(--space-6)">
+          <div class="field">
+            <label for="lookup">Find by reference</label>
+            <input id="lookup" type="search" placeholder="e.g. QT-DEMO-ABC123" autocomplete="off">
+          </div>
+        </form>
+
+        <p class="muted small" id="summary" aria-live="polite"></p>
+        <div class="request-list" id="request-list"></div>
+        <div class="empty" id="empty" hidden>
+          <h2 style="font-size:1.1rem">No requests yet</h2>
+          <p class="small">Requests you submit from a quotation or servicing form appear here.</p>
+          <div class="actions" style="justify-content:center">
+            <a class="btn btn-primary" href="quote.html">Request a quote</a>
+            <a class="btn btn-secondary" href="services.html">Book servicing</a>
+          </div>
+        </div>
+
+        <div class="actions" id="clear-area" hidden>
+          <button class="btn btn-light" type="button" id="clear-btn">Clear demo requests from this browser</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-bottom">&copy; 2026 Modi International. Demo build: no live services connected.</div>
+    </div>
+  </footer>
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/app.js"></script>
+  <script src="assets/js/requests.js"></script>
+</body>
+</html>
