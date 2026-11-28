@@ -40,7 +40,7 @@ Platform UI font. Use the existing scale (`displayMedium`, `headlineMedium`,
 | Badge / status | `widgets/app_badge.dart`, `status_badge.dart` | Label always carries meaning |
 | Section header | `widgets/app_section_header.dart` | Title plus optional action |
 | App bar | `widgets/app_app_bar.dart` | Shared top bar |
-| Brand | `widgets/brand_wordmark.dart` | **Temporary text-only wordmark.** Replace with the approved logo when supplied |
+| Brand | `widgets/brand_wordmark.dart` | Supplied flame logo (`assets/brand/flame_logo.png`) with the wordmark text |
 | Bottom navigation | `app/shell/app_shell.dart` | Themed via `NavigationBarThemeData` |
 
 ## Motion
@@ -52,4 +52,4 @@ Motion is limited to state changes (press, selection, page change).
 
 - Product photography. Cards currently show category icons. Add supplied,
   licensed product photos through a single product-image widget when available.
-- A real company logo. None was supplied; `BrandWordmark` is the placeholder.
+- Launcher icon: still the default Android icon. The supplied logo is 111×156 px, so a 512 px PNG or SVG is needed for a sharp app icon.

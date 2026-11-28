@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 
 import '../theme/app_colors.dart';
+import '../theme/app_spacing.dart';
 import '../theme/app_typography.dart';
 
-/// Temporary text-only brand treatment. No logo asset has been supplied, so
-/// this is typography only. Replace the body of this widget (and nowhere
-/// else) when an approved logo is available.
+/// Brand lockup: the supplied flame logo plus the wordmark text. The logo
+/// asset is declared in pubspec.yaml; change it here (and nowhere else) if
+/// the brand assets are updated.
 class BrandWordmark extends StatelessWidget {
   const BrandWordmark({super.key, this.onDark = false});
 
@@ -17,26 +18,39 @@ class BrandWordmark extends StatelessWidget {
     final primary = onDark ? AppColors.white : AppColors.navy;
     final secondary = onDark ? AppColors.navyLight : AppColors.ink;
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+    return Row(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
-        Text(
-          'MODI',
-          style: AppTypography.labelSmall.copyWith(
-            color: primary,
-            letterSpacing: 2.2,
-            fontWeight: FontWeight.w700,
-          ),
+        Image.asset(
+          'assets/brand/flame_logo.png',
+          height: 36,
+          fit: BoxFit.contain,
+          filterQuality: FilterQuality.medium,
+          semanticLabel: 'Modi Fire Safety logo',
         ),
-        Text(
-          'FIRE SAFETY',
-          style: AppTypography.titleSmall.copyWith(
-            color: secondary,
-            height: 1.1,
-            letterSpacing: 0.6,
-            fontWeight: FontWeight.w700,
+        const SizedBox(width: AppSpacing.md),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+          Text(
+            'MODI',
+            style: AppTypography.labelSmall.copyWith(
+              color: primary,
+              letterSpacing: 2.2,
+              fontWeight: FontWeight.w700,
+            ),
           ),
+          Text(
+            'FIRE SAFETY',
+            style: AppTypography.titleSmall.copyWith(
+              color: secondary,
+              height: 1.1,
+              letterSpacing: 0.6,
+              fontWeight: FontWeight.w700,
+            ),
+          ),
+          ],
         ),
       ],
     );
