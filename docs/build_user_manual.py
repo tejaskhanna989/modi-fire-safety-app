@@ -405,7 +405,7 @@ story.append(P("Submitted requests are listed under <b>Quotation requests</b> (a
 # ---------------- 11. Profile ----------------
 story.append(PageBreak())
 story += section("11. Profile: individual and business accounts")
-story.append(P("The <b>Profile</b> tab holds your demo customer details and shortcuts to your records:"))
+story.append(P("The <b>Profile</b> tab holds your demo customer details, an Appearance switch and shortcuts to your records:"))
 story.append(bullets([
     "Orders &amp; history",
     "Equipment register",
@@ -429,6 +429,9 @@ story.append(table([
 story.append(P("Tap <b>Save demo profile</b>. The profile then shows your details, the account type and a "
                "<b>LOCAL DEMO PROFILE</b> badge. Individuals and businesses can use the same app; only the "
                "fields differ.", body))
+story.append(P("<b>Appearance.</b> The Dark theme switch changes the whole app between the light design "
+               "(default) and a dark design. The choice is not saved, so the app opens in light mode again "
+               "after you close it.", body))
 story.append(P("Your profile is used to fill in the contact snapshot at checkout. Changing the account type "
                "does not delete earlier requests.", small))
 

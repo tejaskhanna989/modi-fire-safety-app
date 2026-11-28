@@ -37,7 +37,7 @@ class ProductCard extends StatelessWidget {
           Container(
             height: 92,
             decoration: BoxDecoration(
-              color: tint,
+              color: context.isDark ? AppColors.darkSurfaceAlt : tint,
               borderRadius: const BorderRadius.vertical(
                 top: Radius.circular(AppRadius.lg),
               ),

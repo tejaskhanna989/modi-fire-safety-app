@@ -19,6 +19,13 @@ colours, or create their own `ThemeData`.
 Semantic colours (`amber`, `success`, `info`, `danger`, each with a `*Tint`)
 are for status only and must always be paired with a text label.
 
+## Theme
+
+Light is the default. Users can switch to the dark design from
+Profile > Appearance. `ThemeState` (`lib/core/state/theme_state.dart`) holds
+the choice in memory only, and `app.dart` passes it to `MaterialApp`. Dark
+colours come from `AppTheme.dark()`; they follow the same token names.
+
 ## Typography (`app_typography.dart`)
 
 Platform UI font. Use the existing scale (`displayMedium`, `headlineMedium`,

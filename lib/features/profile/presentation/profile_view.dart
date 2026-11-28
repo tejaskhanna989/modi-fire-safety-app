@@ -84,6 +84,9 @@ class ProfileView extends StatelessWidget {
             subtitle: 'Servicing, refilling and inspection',
             onTap: () => Navigator.of(context).pushNamed(AppRoutes.services),
           ),
+          const AppSectionHeader(title: 'Appearance'),
+          const SizedBox(height: AppSpacing.md),
+          const _AppearanceCard(),
           const SizedBox(height: AppSpacing.xl),
           const LocalOnlyNotice(),
           const SizedBox(height: AppSpacing.xl),
@@ -195,6 +198,41 @@ class _DetailRow extends StatelessWidget {
           child: Text(value, style: AppTypography.bodyMedium),
         ),
       ],
+    );
+  }
+}
+
+class _AppearanceCard extends StatelessWidget {
+  const _AppearanceCard();
+
+  @override
+  Widget build(BuildContext context) {
+    final appearance = context.appearance;
+
+    return ListenableBuilder(
+      listenable: appearance,
+      builder: (context, _) => AppCard(
+        child: Row(
+          children: <Widget>[
+            Icon(Icons.dark_mode_outlined, color: context.scheme.primary),
+            const SizedBox(width: AppSpacing.lg),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text('Dark theme', style: AppTypography.titleSmall),
+                  const SizedBox(height: 2),
+                  Text(
+                    'Off uses the light design (default).',
+                    style: AppTypography.bodySmall,
+                  ),
+                ],
+              ),
+            ),
+            Switch(value: appearance.isDark, onChanged: appearance.setDark),
+          ],
+        ),
+      ),
     );
   }
 }

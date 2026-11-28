@@ -4,6 +4,8 @@ import '../state/cart_scope.dart';
 import '../state/cart_state.dart';
 import '../state/demo_data_scope.dart';
 import '../state/demo_data_state.dart';
+import '../state/theme_scope.dart';
+import '../state/theme_state.dart';
 
 extension AppContextX on BuildContext {
   ThemeData get theme => Theme.of(this);
@@ -30,6 +32,10 @@ extension AppContextX on BuildContext {
 
 extension CartContextX on BuildContext {
   CartState get cart => CartScope.of(this);
+}
+
+extension AppearanceContextX on BuildContext {
+  ThemeState get appearance => ThemeScope.of(this);
 }
 
 extension DemoDataContextX on BuildContext {
