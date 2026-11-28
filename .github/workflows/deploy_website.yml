@@ -33,6 +33,15 @@ jobs:
       - name: Check out source
         uses: actions/checkout@v4
 
+      - name: Stage site and check entry point
+        run: |
+          rm -rf _site
+          mkdir _site
+          cp -R website/. _site/
+          test -f _site/index.html || { echo "index.html missing from staged site"; exit 1; }
+          echo "Staged files:"
+          find _site -type f | sort
+
       - name: Configure Pages
         uses: actions/configure-pages@v5
         with:
@@ -41,7 +50,7 @@ jobs:
       - name: Upload static site
         uses: actions/upload-pages-artifact@v3
         with:
-          path: website
+          path: _site
 
       - name: Deploy
         id: deployment
